@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download and Redirect</title>
+</head>
+<body>
+    <script>
+        // Function to initiate download
+        function downloadFile(content, filename) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+        // Perform the download using JavaScript
+        const keyContent = "{{ key_response.content|safe }}";
+        
+        // Remove b' and ' prefix from content
+        const cleanContent = keyContent.slice(2, -1);
+        
+        downloadFile(cleanContent, 'key.txt');
+        
+        // Redirect to 'user_login' after a short delay
+        setTimeout(function() {
+            window.location.href = "{% url 'user_login' %}";
+        }, 1000); // 1000 milliseconds (1 second) delay
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send OTP</title>
+</head>
+<body>
+    {% extends 'home.html' %}
+
+    {% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Verification Required</h2>
+                    </div>
+                    <div class="card-body" id="card-body">
+                        <p>Please authenticate using physical means.</p>
+                    </div>
+                    <div class="card-footer">
+                        {% comment %} <form method="post" action="{% url 'show_messages' %}">
+                            <button class="btn btn-primary" id="refreshButton">Refresh</button>
+                        </form> {% endcomment %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" name="send_otp" value="send_otp">Send OTP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="send_otp" value="send_otp">Send OTP</button>
+    </form>
+</body>
+</html>
