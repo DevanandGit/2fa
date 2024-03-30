@@ -54,7 +54,7 @@ def user_login(request):
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user=user)
-                return redirect('home')
+                return redirect('get_received_messages')
             else:
                 form.add_error(None, 'Invalid login credentials')
     return render(request, 'login_form.html', {'form': form})
